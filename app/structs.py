@@ -21,7 +21,7 @@ class Hand:
     def __str__(self):
         return f"1: {self.card1}\n2: {self.card2}\n3: {self.card3}\n4: {self.card4}\n5: {self.card5}\n6: {self.card6}"
     
-    def remove_and_print(self, num1, num2):
+    def remove_and_print(self, num1, num2, crib):
         track = 1
         for i in range(1, 7):
             match i:
@@ -30,36 +30,42 @@ class Hand:
                         print(f"{track}: {self.card1}")
                         track += 1
                     else:
+                        crib.append(self.card1)
                         self.card1 = -1
                 case 2:
                     if num1 != 2 and num2 != 2:
                         print(f"{track}: {self.card2}")
                         track += 1
                     else:
+                        crib.append(self.card2)
                         self.card2 = -1
                 case 3:
                     if num1 != 3 and num2 != 3:
                         print(f"{track}: {self.card3}")
                         track += 1
                     else:
+                        crib.append(self.card3)
                         self.card3 = -1
                 case 4:
                     if num1 != 4 and num2 != 4:
                         print(f"{track}: {self.card4}")
                         track += 1
                     else:
+                        crib.append(self.card4)
                         self.card4 = -1
                 case 5:
                     if num1 != 5 and num2 != 5:
                         print(f"{track}: {self.card5}")
                         track += 1
                     else:
+                        crib.append(self.card5)
                         self.card5 = -1
                 case 6:
                     if num1 != 6 and num2 != 6:
                         print(f"{track}: {self.card6}")
                         track += 1
                     else:
+                        crib.append(self.card6)
                         self.card6 = -1
 
 class Suit(Enum):

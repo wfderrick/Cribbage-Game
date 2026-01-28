@@ -12,9 +12,10 @@ def main():
     cut_card = 0
     player1_score = 0
     player2_score = 0
+    crib = []
     #print("|----------------------------------------------------|\n| Your Score: 0                   Opponent's Score: 0|\n|                                                    |\n|                                                    |\n|                                                    |\n|----------------------------------------------------|")
 
-    tools.round(player1_hand, player2_hand, cut_card, round_num, player1_score, player2_score)
+    tools.round(player1_hand, player2_hand, cut_card, round_num, player1_score, player2_score, crib)
     
 
 if __name__ == "__main__":
