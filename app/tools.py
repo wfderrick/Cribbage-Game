@@ -2,10 +2,13 @@ import random
 import structs
 
 
+# int list, int list, int -> CARD
+# The deal function takes in two lists of integers and a single integer and uses them to create a hand for the player,
+# a hand for the computer, and a cut card.
 def deal(player1_hand, player2_hand, cut_card):
     curr_cards = structs.CONST_CARDS.copy
     deal_opts = []
- 
+
     for i in range(13):
         new_card = int(random.random() * 52)
         while new_card in deal_opts:
@@ -19,7 +22,7 @@ def deal(player1_hand, player2_hand, cut_card):
     cut_card = deal_opts.pop(0)
 
     return cut_card
-    
+
 
 def transform_cards(player_nums, player_hand):
     player_hand.card1 = get_card(player_nums[0], structs.Card(0, 0, 0))
@@ -30,6 +33,7 @@ def transform_cards(player_nums, player_hand):
     player_hand.card6 = get_card(player_nums[5], structs.Card(0, 0, 0))
     return player_hand
 
+
 def get_card(num, card):
     if num < 14:
         card.suit = structs.Suit.CLUBS
@@ -39,7 +43,7 @@ def get_card(num, card):
         card.suit = structs.Suit.HEARTS
     else:
         card.suit = structs.Suit.SPADES
-    
+
     temp = num % 13
 
     if temp == 0:
@@ -81,8 +85,20 @@ def get_card(num, card):
     elif temp == 12:
         card.value = 10
         card.face = structs.Face.QUEEN
-    
+
     return card
 
-def get_vals(player_hand, vals):
-    pass
+def hand_to_list(hand, hand_list):
+    if hand.card1 != -1:
+        hand_list.append(hand.card1)
+    if hand.card2 != -1:
+        hand_list.append(hand.card2)
+    if hand.card3 != -1:
+        hand_list.append(hand.card3)
+    if hand.card4 != -1:
+        hand_list.append(hand.card4)
+    if hand.card5 != -1:
+        hand_list.append(hand.card5)
+    if hand.card6 != -1:
+        hand_list.append(hand.card6)
+

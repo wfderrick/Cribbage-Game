@@ -1,13 +1,15 @@
 from enum import Enum
 
+
 class Card:
     def __init__(self, suit, face, value):
         self.suit = suit
         self.face = face
         self.value = value
-    
+
     def __str__(self):
         return f"{self.face.name} of {self.suit.name}"
+
 
 class Hand:
     def __init__(self, card1, card2, card3, card4, card5, card6):
@@ -47,6 +49,7 @@ class Hand:
                         print(f"{track}: {self.card6}")
                         track += 1
         return ""
+
     def remove(self, num1, num2, crib):
         for i in range(1, 7):
             match i:
@@ -75,11 +78,13 @@ class Hand:
                         crib.append(self.card6)
                         self.card6 = -1
 
+
 class Suit(Enum):
     CLUBS = 1
     DIAMONDS = 2
     HEARTS = 3
     SPADES = 4
+
 
 class Face(Enum):
     ACE = 1
@@ -96,5 +101,58 @@ class Face(Enum):
     QUEEN = 12
     KING = 13
 
-CONST_CARDS = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52]
 
+CONST_CARDS = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+]
