@@ -85,4 +85,4 @@ def get_card(num, card):
     return card
 
 def get_vals(player_hand, vals):
-    
+    pass

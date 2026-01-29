@@ -11,13 +11,17 @@ def round(player1_hand, player2_hand, cut_card, round_num, player1_score, player
           f"X   Your Score: {player1_score}             Opponent's Score: {player2_score}             Goal: 120 \n" \
           "X___________________________________________________________________________\n")
     print(f"Begin Round {round_num}:")
+    
     print("This is your hand.\n" \
           "       |||        \n" \
           "       |||        \n" \
           "      \\\\ //       \n" \
           "        V         ")
     print(f"{player1_hand}\n")
-
+    if round_num%2 == 0:
+        print("Opponents Crib!")
+    else:
+        print("Your Crib!")
     val1 = input("Enter the first number to be discarded. ")
     while(int(val1) < 1 or int(val1) > 6):
         val1 = input("Enter a value between 1 and 6. ")
@@ -29,5 +33,16 @@ def round(player1_hand, player2_hand, cut_card, round_num, player1_score, player
         else:
             val2 = input("Enter a value between 1 and 6. ")
 
-    player1_hand.remove_and_print(int(val1), int(val2), crib)
+    player1_hand.remove(int(val1), int(val2), crib)
+    player2_hand.remove(3, 4, crib)
+    print("This is your hand.\n" \
+          "       |||        \n" \
+          "       |||        \n" \
+          "      \\\\ //       \n" \
+          "        V         ")
+    print(f"{player1_hand}\n")
 
+    cut = input("Press any button to see the cut card.")
+    print(cut_card)
+
+    
