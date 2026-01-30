@@ -23,7 +23,9 @@ def deal(player1_hand, player2_hand, cut_card):
 
     return cut_card
 
-
+# int list, Hand object -> A Hand object full of card objects
+# Takes in a list of integers between 1 and 52 and using the get_card function converts each number
+# into its corresponding Card object and places it into a slot in the parameter Hand object.
 def transform_cards(player_nums, player_hand):
     player_hand.card1 = get_card(player_nums[0], structs.Card(0, 0, 0))
     player_hand.card2 = get_card(player_nums[1], structs.Card(0, 0, 0))
@@ -33,7 +35,9 @@ def transform_cards(player_nums, player_hand):
     player_hand.card6 = get_card(player_nums[5], structs.Card(0, 0, 0))
     return player_hand
 
-
+# int, Card object -> A card object with values corresponding to the number
+#Take in an integer between 1 and 52 and a Card object. Using the number each attribute of the parameter card
+# object is filled to create the corresponding card for the number.
 def get_card(num, card):
     if num < 14:
         card.suit = structs.Suit.CLUBS
@@ -88,6 +92,10 @@ def get_card(num, card):
 
     return card
 
+# Hand object, List -> Adds all cards from the Hand object to the list
+# Takes in a Hand object and a list. The function checks each slot for a card. If there is not a card
+# in the slot (aka the value is -1) then nothing is added to the list. Otherwise each card is appended
+# to the end of the list.
 def hand_to_list(hand, hand_list):
     if hand.card1 != -1:
         hand_list.append(hand.card1)
@@ -101,4 +109,3 @@ def hand_to_list(hand, hand_list):
         hand_list.append(hand.card5)
     if hand.card6 != -1:
         hand_list.append(hand.card6)
-

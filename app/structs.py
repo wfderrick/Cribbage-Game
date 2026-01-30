@@ -1,6 +1,9 @@
 from enum import Enum
 
-
+# Card object used to represent cards in a deck. Each card object has three attributes
+# which are suit, face, and value. Suit represents the suit of the card (Clubs, Spades, Hearts, Diamonds, None (For use in code in specific cases)). 
+# Face represents the face value of the card (Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, None (For use in code in specific cases)).
+# Value represent the value of the card in the game cribbage (Ace = 1, Face cards = 10, every other card = to its face value).
 class Card:
     def __init__(self, suit, face, value):
         self.suit = suit
@@ -10,7 +13,8 @@ class Card:
     def __str__(self):
         return f"{self.face.name} of {self.suit.name}"
 
-
+# Hand object which represents the player's and the computer's hands. There are six attributes with each one
+# holding either a card object or a -1 to signify the lack of a card.
 class Hand:
     def __init__(self, card1, card2, card3, card4, card5, card6):
         self.card1 = card1

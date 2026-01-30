@@ -19,6 +19,7 @@ def score(hand_cards, starter):
     total += flush(hand_cards, starter)
     return total
 
+
 def four_score(hand):
     total = 0
     val_list = getvals(hand, [])
@@ -27,6 +28,7 @@ def four_score(hand):
     total += pairs(hand)
     total += flush(hand, structs.Card(structs.Suit.NONE, 0, 0))
     return total
+
 
 def getvals(cards, vals):
     for i in cards:
@@ -59,16 +61,16 @@ def runs(cards, length, prev, run_len, four):
     if prev == -1:
         if four != True:
             return (
-            runs(cards[1:], 1, cards[0], run_len, four)
-            + runs([cards[0]] + cards[2:], 1, cards[1], run_len, four)
-            + runs(cards[:2] + cards[3:], 1, cards[2], run_len, four)
-            + runs(cards[:3] + cards[4:], 1, cards[3], run_len, four)
+                runs(cards[1:], 1, cards[0], run_len, four)
+                + runs([cards[0]] + cards[2:], 1, cards[1], run_len, four)
+                + runs(cards[:2] + cards[3:], 1, cards[2], run_len, four)
+                + runs(cards[:3] + cards[4:], 1, cards[3], run_len, four)
             )
         else:
             return (
-            runs(cards[1:], 1, cards[0], run_len, four)
-            + runs([cards[0]] + cards[2:], 1, cards[1], run_len, four)
-            + runs(cards[:2] + cards[3:], 1, cards[2], run_len, four)
+                runs(cards[1:], 1, cards[0], run_len, four)
+                + runs([cards[0]] + cards[2:], 1, cards[1], run_len, four)
+                + runs(cards[:2] + cards[3:], 1, cards[2], run_len, four)
             )
     elif len(cards) == 0:
         if length >= run_len:
@@ -83,7 +85,7 @@ def runs(cards, length, prev, run_len, four):
                 check = True
                 temp_cards = copy.deepcopy(cards)
                 next = temp_cards.pop(i)
-                add += runs(temp_cards, length + 1, next, run_len)
+                add += runs(temp_cards, length + 1, next, run_len, four)
         if check == False:
             if length >= run_len:
                 return length
@@ -97,16 +99,16 @@ def listruns(cards, length, prev, runs_list, four):
     if prev == -1:
         if four != True:
             return (
-            listruns(cards[1:], 1, cards[0], runs_list, four)
-            + listruns(cards[2:] + [cards[0]], 1, cards[1], runs_list, four)
-            + listruns(cards[:2] + cards[3:], 1, cards[2], runs_list, four)
-            + listruns(cards[:3] + cards[4:], 1, cards[3], runs_list, four)
+                listruns(cards[1:], 1, cards[0], runs_list, four)
+                + listruns(cards[2:] + [cards[0]], 1, cards[1], runs_list, four)
+                + listruns(cards[:2] + cards[3:], 1, cards[2], runs_list, four)
+                + listruns(cards[:3] + cards[4:], 1, cards[3], runs_list, four)
             )
         else:
             return (
-            listruns(cards[1:], 1, cards[0], runs_list, four)
-            + listruns(cards[2:] + [cards[0]], 1, cards[1], runs_list, four)
-            + listruns(cards[:2] + cards[3:], 1, cards[2], runs_list, four)
+                listruns(cards[1:], 1, cards[0], runs_list, four)
+                + listruns(cards[2:] + [cards[0]], 1, cards[1], runs_list, four)
+                + listruns(cards[:2] + cards[3:], 1, cards[2], runs_list, four)
             )
     elif len(cards) == 0:
         return runs_list + [length]
@@ -115,7 +117,7 @@ def listruns(cards, length, prev, runs_list, four):
             if (cards[i].face.value) == (prev.face.value + 1):
                 temp_cards = copy.deepcopy(cards)
                 next = temp_cards.pop(i)
-                return listruns(temp_cards, length + 1, next, runs_list)
+                return listruns(temp_cards, length + 1, next, runs_list, four)
         return runs_list + [length]
 
 
