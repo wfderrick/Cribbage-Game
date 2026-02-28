@@ -18,13 +18,13 @@ def main():
 
     while player1_score < 121 and player2_score < 121:
         round(
-        player1_hand,
-        player2_hand,
-        cut_card,
-        round_num,
-        player1_score,
-        player2_score,
-        crib,
+            player1_hand,
+            player2_hand,
+            cut_card,
+            round_num,
+            player1_score,
+            player2_score,
+            crib,
         )
         round_num += 1
 

@@ -6,7 +6,7 @@ def score(hand_cards, starter):
     total = 0
     for i in range(4):
         if (
-            hand_cards[i].face == structs.Face.JACK
+            hand_cards[i].rank == structs.Rank.JACK
             and hand_cards[i].suit == starter.suit
         ):
             total += 1
@@ -83,7 +83,7 @@ def runs(cards, length, prev, run_len, four):
         check = False
         add = 0
         for i in range(len(cards)):
-            if cards[i].face.value == prev.face.value + 1:
+            if cards[i].rank.value == prev.rank.value + 1:
                 check = True
                 temp_cards = copy.deepcopy(cards)
                 next = temp_cards.pop(i)
@@ -118,7 +118,7 @@ def listruns(cards, length, prev, runs_list, four):
         return runs_list + [length]
     else:
         for i in range(len(cards)):
-            if (cards[i].face.value) == (prev.face.value + 1):
+            if (cards[i].rank.value) == (prev.rank.value + 1):
                 temp_cards = copy.deepcopy(cards)
                 next = temp_cards.pop(i)
                 return listruns(temp_cards, length + 1, next, runs_list, four)
@@ -129,7 +129,7 @@ def pairs(cards):
     total = 0
     for i in range(len(cards)):
         for j in range((i + 1), (len(cards))):
-            if cards[i].face == cards[j].face:
+            if cards[i].rank == cards[j].rank:
                 total += 2
     return total
 
@@ -148,19 +148,19 @@ def flush(hand, starter):
 
 
 example_hand = [
-    structs.Card(structs.Suit.CLUBS, structs.Face.TWO, 2),
-    structs.Card(structs.Suit.DIAMONDS, structs.Face.TWO, 2),
-    structs.Card(structs.Suit.SPADES, structs.Face.THREE, 3),
-    structs.Card(structs.Suit.HEARTS, structs.Face.THREE, 3),
+    structs.Card(structs.Suit.SPADES, structs.Rank.THREE, 3),
+    structs.Card(structs.Suit.DIAMONDS, structs.Rank.TWO, 2),
+    structs.Card(structs.Suit.HEARTS, structs.Rank.FIVE, 5),
+    structs.Card(structs.Suit.HEARTS, structs.Rank.FOUR, 4),
 ]
 
 example_hand2 = [
-    structs.Card(structs.Suit.SPADES, structs.Face.EIGHT, 8),
-    #structs.Card(structs.Suit.SPADES, structs.Face.JACK, 10),
-    structs.Card(structs.Suit.CLUBS, structs.Face.TEN, 10),
-    structs.Card(structs.Suit.CLUBS, structs.Face.NINE, 9),
-    #structs.Card(structs.Suit.CLUBS, structs.Face.EIGHT, 8),
-    structs.Card(structs.Suit.HEARTS, structs.Face.EIGHT, 8),
+    structs.Card(structs.Suit.SPADES, structs.Rank.EIGHT, 8),
+    # structs.Card(structs.Suit.SPADES, structs.Rank.JACK, 10),
+    structs.Card(structs.Suit.CLUBS, structs.Rank.TEN, 10),
+    structs.Card(structs.Suit.CLUBS, structs.Rank.NINE, 9),
+    # structs.Card(structs.Suit.CLUBS, structs.Rank.EIGHT, 8),
+    structs.Card(structs.Suit.HEARTS, structs.Rank.EIGHT, 8),
 ]
-#print(score(example_hand, structs.Card(structs.Suit.CLUBS, structs.Face.FOUR, 4)))
-#print(four_score(example_hand2))
+# print(score(example_hand, structs.Card(structs.Suit.CLUBS, structs.Rank.FOUR, 4)))
+# print(four_score(example_hand2))

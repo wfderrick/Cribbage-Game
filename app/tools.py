@@ -53,43 +53,43 @@ def get_card(num, card):
 
     if temp == 0:
         card.value = 10
-        card.face = structs.Face.KING
+        card.rank = structs.Rank.KING
     elif temp == 1:
         card.value = 1
-        card.face = structs.Face.ACE
+        card.rank = structs.Rank.ACE
     elif temp == 2:
         card.value = 2
-        card.face = structs.Face.TWO
+        card.rank = structs.Rank.TWO
     elif temp == 3:
         card.value = 3
-        card.face = structs.Face.THREE
+        card.rank = structs.Rank.THREE
     elif temp == 4:
         card.value = 4
-        card.face = structs.Face.FOUR
+        card.rank = structs.Rank.FOUR
     elif temp == 5:
         card.value = 5
-        card.face = structs.Face.FIVE
+        card.rank = structs.Rank.FIVE
     elif temp == 6:
         card.value = 6
-        card.face = structs.Face.SIX
+        card.rank = structs.Rank.SIX
     elif temp == 7:
         card.value = 7
-        card.face = structs.Face.SEVEN
+        card.rank = structs.Rank.SEVEN
     elif temp == 8:
         card.value = 8
-        card.face = structs.Face.EIGHT
+        card.rank = structs.Rank.EIGHT
     elif temp == 9:
         card.value = 9
-        card.face = structs.Face.NINE
+        card.rank = structs.Rank.NINE
     elif temp == 10:
         card.value = 10
-        card.face = structs.Face.TEN
+        card.rank = structs.Rank.TEN
     elif temp == 11:
         card.value = 10
-        card.face = structs.Face.JACK
+        card.rank = structs.Rank.JACK
     elif temp == 12:
         card.value = 10
-        card.face = structs.Face.QUEEN
+        card.rank = structs.Rank.QUEEN
 
     return card
 

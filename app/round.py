@@ -1,7 +1,8 @@
 import tools
 import structs
-from opponentbrain import discard
+from opponentbrain import discard, pegging
 import copy
+from pegging import peg_score
 def round(
     player1_hand, player2_hand, cut_card, round_num, player1_score, player2_score, crib
 ):
@@ -62,7 +63,34 @@ def round(
     cur_val = 0
     p1_pegging = copy.deepcopy(player1_hand.hand)
     p2_pegging = copy.deepcopy(player2_hand.hand)
+    prev_cards = []
+    go = False
 
-    while len(player1_hand.hand) > 0 or len(player2_hand.hand) > 0:
-        if last_player == 1 and len(player2_hand.hand) > 0:
-            play = 
+    while len(p1_pegging) > 0 or len(p2_pegging) > 0:
+        if last_player == 1:
+            if go == True:
+                card = pegging(cur_val, prev_cards[-1], p2_pegging)
+                if card == -1:
+                    player1_score += 1
+                    go == False
+                    cur_val = 0
+                    prev_cards = []
+                else:
+                    (p2_score, val) = peg_score(prev_cards, card, cur_val)
+                    player2_score += p2_score
+                    cur_val = val
+                    prev_card = card
+                    p2_pegging.remove(card)
+            else:
+                (p2_score, val) = peg_score(prev_cards, card, cur_val)
+                player2_score += p2_score
+                cur_val = val
+                prev_card = card
+                p2_pegging.remove(card)
+                
+            if len(p2_pegging) > 0:
+                card = pegging(cur_val, prev_card, p2_pegging)
+                if card == -1:
+            else:
+                last_player = 2
+        if last_player == 2:

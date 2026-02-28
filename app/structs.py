@@ -1,17 +1,19 @@
 from enum import Enum
 
+
 # Card object used to represent cards in a deck. Each card object has three attributes
-# which are suit, face, and value. Suit represents the suit of the card (Clubs, Spades, Hearts, Diamonds, None (For use in code in specific cases)). 
-# Face represents the face value of the card (Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, None (For use in code in specific cases)).
-# Value represent the value of the card in the game cribbage (Ace = 1, Face cards = 10, every other card = to its face value).
+# which are suit, rank, and value. Suit represents the suit of the card (Clubs, Spades, Hearts, Diamonds, None (For use in code in specific cases)).
+# rank represents the rank value of the card (Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, None (For use in code in specific cases)).
+# Value represent the value of the card in the game cribbage (Ace = 1, rank cards = 10, every other card = to its rank value).
 class Card:
-    def __init__(self, suit, face, value):
+    def __init__(self, suit, rank, value):
         self.suit = suit
-        self.face = face
+        self.rank = rank
         self.value = value
 
     def __str__(self):
-        return f"{self.face.name} of {self.suit.name}"
+        return f"{self.rank.name} of {self.suit.name}"
+
 
 # Hand object which represents the player's and the computer's hands. There is a single attribute which is the hand attribute which
 # is a list of Card objects
@@ -28,23 +30,25 @@ class Hand:
 
     def remove(self, num1, num2, crib):
         for i in range(len(self.hand)):
-            if num1  == i + 1 :
-                if num2 == -1:      
+            if num1 == i + 1:
+                if num2 == -1:
                     crib.append(self.hand[i - 1])
                     self.hand.pop(i - 1)
                 else:
                     crib.append(self.hand[i])
                     self.hand.pop(i)
                 num1 = -1
-                
+
             elif num2 == i + 1:
-                if num1 == -1:      
+                if num1 == -1:
                     crib.append(self.hand[i - 1])
                     self.hand.pop(i - 1)
                 else:
                     crib.append(self.hand[i])
                     self.hand.pop(i)
                 num2 = -1
+
+
 class Suit(Enum):
     CLUBS = 1
     DIAMONDS = 2
@@ -53,7 +57,7 @@ class Suit(Enum):
     NONE = 5
 
 
-class Face(Enum):
+class Rank(Enum):
     ACE = 1
     TWO = 2
     THREE = 3
@@ -68,6 +72,7 @@ class Face(Enum):
     QUEEN = 12
     KING = 13
     NONE = 14
+
 
 CONST_CARDS = [
     1,
