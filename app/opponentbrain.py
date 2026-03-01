@@ -105,7 +105,7 @@ def pegging(cur_val, prev, hand):
     elif cur_val < 31:
         val = next((x for x in hand if x.value + cur_val == 31), None)
         if val == None:
-            val = next((x for x in hand if x.rank == prev.rank), None)
+            val = next((x for x in hand if x.rank == prev.rank and cur_val + prev.rank.value <= 31), None)
         if val == None:
             val = next((x for x in hand if x.value == 10 and cur_val + 10 <= 31), None)
         if val == None:

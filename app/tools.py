@@ -6,7 +6,8 @@ import structs
 # The deal function takes in two lists of integers and a single integer and uses them to create a hand for the player,
 # a hand for the computer, and a cut card.
 def deal(player1_hand, player2_hand, cut_card):
-    curr_cards = structs.CONST_CARDS.copy
+    player1_hand.clear
+    player2_hand.clear
     deal_opts = []
 
     for i in range(13):
