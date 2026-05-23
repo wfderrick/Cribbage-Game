@@ -51,3 +51,54 @@ def peg_score(prev_cards, new_card, cur_val):
 
     return info
 
+"""def computer_pegging():
+    if cur_val == 31:
+                input("31 was reached so the pegging will reset to 0.")
+                cur_val = 0
+                go = False
+            if go == True:
+                if len(p2_pegging) > 0:
+                    if len(prev_cards) > 0:
+                        card = pegging(cur_val, prev_cards[len(prev_cards) -1], p2_pegging)
+                    else:
+                        card = pegging(cur_val, [], p2_pegging)
+                    if card == -1:
+                        go == False
+                        cur_val = 0
+                        prev_cards = []
+                        last_player = 2
+                    else:
+                        (p2_score, val) = peg_score(prev_cards, card, cur_val)
+                        player2_score[0] += p2_score + 1
+                        cur_val = val
+                        p2_pegging.remove(card)
+                else:
+                    last_player = 2
+                    cur_val = 0
+                    prev_cards = []
+                    go = False
+            else:
+                if len(p2_pegging) > 0:
+                    if len(prev_cards) > 0:
+                        card = pegging(cur_val, prev_cards[len(prev_cards) - 1], p2_pegging)
+                    else:
+                        card = pegging(cur_val, [], p2_pegging)
+                    if card == -1:
+                        go = True
+                        p1_peg_score += 1
+                        last_player = 2
+                    else:
+                        (p2_score, val) = peg_score(prev_cards, card, cur_val)
+                        player2_score[0] += p2_score
+                        cur_val = val
+                        p2_pegging.remove(card)
+                        last_player = 2
+                else:
+                    last_player = 2
+                    go = False
+            if card == -1:
+                print(f"The computer couldn't play.")
+            else:
+                print(f"Computer Played: {card}")
+            print(f"The current value is: {cur_val}")"""
+            

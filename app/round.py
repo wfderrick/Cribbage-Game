@@ -65,37 +65,44 @@ def round(
     cur_val = 0
     p1_pegging = copy.deepcopy(player1_hand.hand)
     p2_pegging = copy.deepcopy(player2_hand.hand)
+    p1_peg_score = 0
+    p2_peg_score = 0
     prev_cards = []
     go = False
     can_play = False
 
     while len(p1_pegging) > 0 or len(p2_pegging) > 0:
+        if cur_val == 31:
+            cur_val = 0
+            input("31 was reached so the pegging will reset to 0.")
+            cur_val = 0
+            go = False
+
+        
         if last_player == 1:
-            if cur_val == 31:
-                input("31 was reached so the pegging will reset to 0.")
-                cur_val = 0
-                go = False
             if go == True:
                 if len(p2_pegging) > 0:
                     if len(prev_cards) > 0:
-                        card = pegging(cur_val, prev_cards[len(prev_cards) -1], p2_pegging)
+                        card = pegging(cur_val, prev_cards[len(prev_cards) - 1], p2_pegging)
                     else:
-                        card = pegging(cur_val, [], p2_pegging)
+                        card = pegging(cur_val, -1, p2_pegging)
                     if card == -1:
-                        player2_score[0] += 1
                         go == False
                         cur_val = 0
                         prev_cards = []
                         last_player = 2
                     else:
                         (p2_score, val) = peg_score(prev_cards, card, cur_val)
-                        player2_score[0] += p2_score
+                        p2_peg_score += p2_score + 1
                         cur_val = val
                         p2_pegging.remove(card)
                 else:
-                    last_player = 2
+                    go == False
                     cur_val = 0
-                    go = False
+                    prev_cards = []
+                    last_player = 2
+
+            #Not Currently Go
             else:
                 if len(p2_pegging) > 0:
                     if len(prev_cards) > 0:
@@ -104,10 +111,11 @@ def round(
                         card = pegging(cur_val, [], p2_pegging)
                     if card == -1:
                         go = True
+                        p1_peg_score += 1
                         last_player = 2
                     else:
                         (p2_score, val) = peg_score(prev_cards, card, cur_val)
-                        player2_score[0] += p2_score
+                        p2_peg_score += p2_score
                         cur_val = val
                         p2_pegging.remove(card)
                         last_player = 2
@@ -121,54 +129,45 @@ def round(
             print(f"The current value is: {cur_val}")
             
         else:
-            if cur_val == 31:
-                input("31 was reached so the pegging will reset to 0.")
-                cur_val = 0
-                go = False
             for i in p1_pegging:
                 if i.value + cur_val <= 31:
                     can_play = True
                     break
             if can_play:
-                if len(p1_pegging) > 0:
-                    print(
-                        "This is your hand.\n"
-                        "       |||        \n"
-                        "       |||        \n"
-                        "      \\\\ //       \n"
-                        "        V         ")
-                    track = 1
-                    for i in p1_pegging:
-                        print(f"{track}: {i}")
-                        track += 1
-                    card_num = input(f"Enter the number next to the card you would like to peg.")
-                    check = False
-                    while ((not card_num.isdigit()) or int(card_num) > track or int(card_num) < 1) or check == False:
-                        if (not card_num.isdigit()) or int(card_num) > track or int(card_num) < 1:
-                            card_num = input(f"Enter a number between 1 and {track - 1}")
-                        card = p1_pegging[int(card_num) - 1]
-                        if card.value + cur_val <= 31:
-                            check = True
-                        else:
-                            card_num = input(f"Enter a different number for a card that is actually playable:")
-
-                    if go == True:
-                            (p1_score, val) = peg_score(prev_cards, card, cur_val)
-                            player1_score[0] += p1_score
-                            cur_val = val
-                            prev_cards.append(card)
-                            p1_pegging.remove(card)
+                print(
+                    "This is your hand.\n"
+                    "       |||        \n"
+                    "       |||        \n"
+                    "      \\\\ //       \n"
+                    "        V         ")
+                track = 1
+                for i in p1_pegging:
+                    print(f"{track}: {i}")
+                    track += 1
+                card_num = input(f"Enter the number next to the card you would like to peg.")
+                check = False
+                while ((not card_num.isdigit()) or int(card_num) > track or int(card_num) < 1) or check == False:
+                    if (not card_num.isdigit()) or int(card_num) > track or int(card_num) < 1:
+                        card_num = input(f"Enter a number between 1 and {track - 1}")
+                    card = p1_pegging[int(card_num) - 1]
+                    if card.value + cur_val <= 31:
+                        check = True
                     else:
-                            (p1_score, val) = peg_score(prev_cards, card, cur_val)
-                            player1_score[0] += p1_score
-                            cur_val = val                        
-                            prev_cards.append(card)
-                            p1_pegging.remove(card) 
-                            last_player = 1
+                        card_num = input(f"Enter a different number for a card that is actually playable:")
+
+                if go == True:
+                        (p1_score, val) = peg_score(prev_cards, card, cur_val)
+                        p1_peg_score += p1_score + 1
+                        cur_val = val
+                        prev_cards.append(card)
+                        p1_pegging.remove(card)
                 else:
-                    if go == True:
-                        player1_score[0] += 1
-                    last_player = 1
+                        (p1_score, val) = peg_score(prev_cards, card, cur_val)
+                        p1_peg_score += p1_score
+                        cur_val = val                        
+                        prev_cards.append(card)
+                        p1_pegging.remove(card) 
+                        last_player = 1
                 can_play = False
 
                 input(f"You played a {card} the current value is {cur_val}")
@@ -178,6 +177,7 @@ def round(
                 if go != True:
                     input("You are unable to play any cards so it's a go for your opponent.")
                     go = True
+                    p2_peg_score += 1
                 else:
                     input("You can't play anymore cards so pegging will restart.")
                     cur_val = 0
@@ -187,9 +187,15 @@ def round(
     input(f"Pegging is over the main scoring can begin.")
     player1_val = score(player1_hand.hand, cut_card)
     player2_val = score(player2_hand.hand, cut_card)
-    print(f"Your hand is worth {player1_val} points.")
-    input(f"The computer's hand is worth {player2_val} points.")
-    player1_score[0] += player1_val
-    player2_score[0] += player2_val
+    if round_num % 2 == 0:
+        print(f"Your hand is worth {player1_val} points.")
+        player1_score[0] += player1_val 
+        input(f"The computer's hand is worth {player2_val} points.")
+        player2_score[0] += player2_val
+    else:
+        input(f"The computer's hand is worth {player2_val} points.")
+        player2_score[0] += player2_val
+        print(f"Your hand is worth {player1_val} points.")
+        player1_score[0] += player1_val
     print(f"Your current total score is {player1_score[0]}.")
     input(f"The computer's current score is {player2_score[0]}.") 

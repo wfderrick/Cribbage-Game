@@ -30,6 +30,9 @@ def main():
         round_num += 1
         player1_hand = []
         player2_hand = []
+    
+    if player1_score[0] > 120:
+        print(f"Congratulations You Won!\nYour Score: {player1_score[0]}\nComputer's Score: {player2_score[0]}")
 
 if __name__ == "__main__":
     main()
