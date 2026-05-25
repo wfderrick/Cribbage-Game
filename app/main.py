@@ -30,9 +30,12 @@ def main():
         round_num += 1
         player1_hand = []
         player2_hand = []
+        crib = []
     
     if player1_score[0] > 120:
         print(f"Congratulations You Won!\nYour Score: {player1_score[0]}\nComputer's Score: {player2_score[0]}")
+    else:
+        print(f"Better luck next time the computer won!\nYour Score: {player1_score[0]}\nComputer's Score: {player2_score[0]}")
 
 if __name__ == "__main__":
     main()

@@ -53,7 +53,7 @@ def peg_score(prev_cards, new_card, cur_val):
 
     return info
 
-print(peg_score([Card(Suit.HEARTS, Rank.SIX, 6)], Card(Suit.SPADES, Rank.SIX, 6), 12))
+##print(peg_score([Card(Suit.HEARTS, Rank.SIX, 6)], Card(Suit.SPADES, Rank.SIX, 6), 12))
 
 
 """def computer_pegging():

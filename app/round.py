@@ -1,5 +1,5 @@
 import tools
-from structs import Card, Hand
+from structs import Card, Hand, Suit, Rank
 from opponentbrain import discard, computer_pegging
 import copy
 from pegging import peg_score
@@ -9,6 +9,10 @@ def round(
     player1_hand, player2_hand, cut_card, round_num, player1_score, player2_score, crib
 ):
     cut_card = tools.deal(player1_hand, player2_hand, cut_card)
+    #cut_card = Card(Suit.CLUBS, Rank.FOUR, 4) 
+    #player1_hand = Hand(Card(Suit.SPADES, Rank.ACE, 1), Card(Suit.DIAMONDS, Rank.NINE, 9), Card(Suit.HEARTS, Rank.KING, 10), Card(Suit.SPADES, Rank.SEVEN, 7), Card(Suit.SPADES, Rank.THREE, 3), Card(Suit.CLUBS, Rank.QUEEN, 10))
+    #player2_hand = Hand(Card(Suit.DIAMONDS, Rank.THREE, 3), Card(Suit.HEARTS, Rank.SIX, 6), Card(Suit.DIAMONDS, Rank.FOUR, 4), Card(Suit.CLUBS, Rank.TWO, 2), Card(Suit.DIAMONDS, Rank.ACE, 1), Card(Suit.HEARTS, Rank.SEVEN, 7))
+
     player1_hand = tools.transform_cards(player1_hand, Hand(0, 0, 0, 0, 0, 0))
     player2_hand = tools.transform_cards(player2_hand, Hand(0, 0, 0, 0, 0, 0))
     cut_card = tools.get_card(cut_card, Card(0, 0, 0))
@@ -100,11 +104,13 @@ def round(
                         p2_peg_score += p2_score
                         player2_score[0] += p2_score
                         print(f"The computer got {p2_score} points.")
+                        if player2_score[0] > 120:
+                            return
                         cur_val = val
                         prev_cards.append(card)
                         p2_pegging.remove(card)
                 else:
-                    go == False
+                    go = False
                     cur_val = 0
                     prev_cards = []
                     last_player = 2
@@ -122,12 +128,16 @@ def round(
                         p1_peg_score += 1
                         player1_score[0] += 1
                         print(f"You got 1 point.")
+                        if player1_score[0] > 120:
+                            return
                         last_player = 2
                     else:
                         (p2_score, val) = peg_score(prev_cards, card, cur_val)
                         p2_peg_score += p2_score
                         player2_score[0] += p2_score
                         print(f"The computer got {p2_score} points.")
+                        if player2_score[0] > 120:
+                            return
                         cur_val = val
                         prev_cards.append(card)
                         p2_pegging.remove(card)
@@ -137,6 +147,8 @@ def round(
                     go = True
                     p1_peg_score += 1
                     player1_score[0] += 1
+                    if player1_score[0] > 120:
+                            return
                     print(f"You got 1 point.")
                     card = -1
             if card == -1:
@@ -177,6 +189,8 @@ def round(
                         p1_peg_score += p1_score
                         player1_score[0] += p1_score
                         print(f"You got {p1_score} points.")
+                        if player1_score[0] > 120:
+                            return
                         cur_val = val
                         prev_cards.append(card)
                         p1_pegging.remove(card)
@@ -185,6 +199,8 @@ def round(
                         p1_peg_score += p1_score
                         player1_score[0] += p1_score
                         print(f"You got {p1_score} points.")
+                        if player1_score[0] > 120:
+                            return
                         cur_val = val                        
                         prev_cards.append(card)
                         p1_pegging.remove(card) 
@@ -195,12 +211,15 @@ def round(
                 if cur_val == 31:
                     cur_val = 0
                     prev_cards = []
+                    go = False
             else:
                 if go != True:
                     input("You are unable to play any cards so it's a go for your opponent.")
                     go = True
                     p2_peg_score += 1
                     player2_score[0] += 1
+                    if player2_score[0] > 120:
+                            return
                     print(f"The computer got 1 point.")
                 else:
                     input("You can't play anymore cards so pegging will restart.")
@@ -212,10 +231,14 @@ def round(
         if last_player == 1:
             p1_peg_score += 1
             player1_score[0] += 1
+            if player1_score[0] > 120:
+                return
             print(f"You got 1 point.")
         else:
             p2_peg_score += 1
             player2_score[0] += 1
+            if player2_score[0] > 120:
+                return
             print(f"The computer got 1 point.")
 
     input(f"Pegging is over.\nYou scored {p1_peg_score} points.\nThe computer scored {p2_peg_score} points.")
@@ -225,17 +248,29 @@ def round(
     if round_num % 2 == 0:
         print(f"Your hand is worth {player1_val} points.")
         player1_score[0] += player1_val 
+        if player1_score[0] > 120:
+            return
         print(f"The computer's hand is worth {player2_val} points.")
         player2_score[0] += player2_val
+        if player2_score[0] > 120:
+            return
         input(f"The computer's crib is worth {crib_val} points.")
         player2_score[0] += crib_val
+        if player2_score[0] > 120:
+            return
     else:
         print(f"The computer's hand is worth {player2_val} points.")
         player2_score[0] += player2_val
+        if player2_score[0] > 120:
+            return
         print(f"Your hand is worth {player1_val} points.")
         player1_score[0] += player1_val
+        if player1_score[0] > 120:
+            return
         input(f"Your crib is worth {crib_val} points.")
         player1_score[0] += crib_val
+        if player1_score[0] > 120:
+            return
 
     print(f"Your current total score is {player1_score[0]}.")
     input(f"The computer's current score is {player2_score[0]}.") 
