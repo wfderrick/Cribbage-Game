@@ -9,10 +9,6 @@ def round(
     player1_hand, player2_hand, cut_card, round_num, player1_score, player2_score, crib
 ):
     cut_card = tools.deal(player1_hand, player2_hand, cut_card)
-    #cut_card = Card(Suit.CLUBS, Rank.FOUR, 4) 
-    #player1_hand = Hand(Card(Suit.SPADES, Rank.ACE, 1), Card(Suit.DIAMONDS, Rank.NINE, 9), Card(Suit.HEARTS, Rank.KING, 10), Card(Suit.SPADES, Rank.SEVEN, 7), Card(Suit.SPADES, Rank.THREE, 3), Card(Suit.CLUBS, Rank.QUEEN, 10))
-    #player2_hand = Hand(Card(Suit.DIAMONDS, Rank.THREE, 3), Card(Suit.HEARTS, Rank.SIX, 6), Card(Suit.DIAMONDS, Rank.FOUR, 4), Card(Suit.CLUBS, Rank.TWO, 2), Card(Suit.DIAMONDS, Rank.ACE, 1), Card(Suit.HEARTS, Rank.SEVEN, 7))
-
     player1_hand = tools.transform_cards(player1_hand, Hand(0, 0, 0, 0, 0, 0))
     player2_hand = tools.transform_cards(player2_hand, Hand(0, 0, 0, 0, 0, 0))
     cut_card = tools.get_card(cut_card, Card(0, 0, 0))
